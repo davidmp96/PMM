@@ -2,6 +2,7 @@ package com.example.davpas.prueba1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MediaPlayer miMusica= MediaPlayer.create(getApplicationContext(),R.raw.fiesta);
+        miMusica.start();
 
         final EditText miTexto= (EditText)findViewById(R.id.miTxt);
         final Button miBoton= (Button)findViewById(R.id.miBtn);
@@ -47,4 +51,35 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }*/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this,"onStart- A1", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this,"onResume- A1", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onPause() {
+        Toast.makeText(this,"onPause- A1", Toast.LENGTH_SHORT).show();
+        super.onPause();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this,"onStop- A1", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Toast.makeText(this,"onRestart- A1", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(this,"onDestroy- A1", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
+    }
 }
