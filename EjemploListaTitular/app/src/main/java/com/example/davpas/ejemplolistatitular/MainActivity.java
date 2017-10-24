@@ -40,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    static class ViewHolder {
+        TextView titulo;
+        TextView subtitulo;
+        TextView argumento;
+        ImageView imagen;
+    }
+
     class AdaptadorTitulares extends ArrayAdapter {
         Activity context;
 
@@ -49,22 +56,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public View getView(int position, View contentView, ViewGroup parent) {
-            LayoutInflater inflater = context.getLayoutInflater();
-            View item = inflater.inflate(R.layout.listitem_titular, null);
+            View item = contentView;
+            ViewHolder holder;
 
-            TextView lblTitulo = (TextView)item.findViewById(R.id.LblTitulo);
-            lblTitulo.setText(datos[position].getTitulo());
+            if (item == null) {
+                LayoutInflater inflater = context.getLayoutInflater();
+                item = inflater.inflate(R.layout.listitem_titular, null);
 
-            TextView lblSubtitulo = (TextView)item.findViewById(R.id.LblSubTitulo);
-            lblSubtitulo.setText(datos[position].getSubtitulo());
+                holder = new ViewHolder();
+                holder.titulo = (TextView)item.findViewById(R.id.LblTitulo);
+                holder.subtitulo = (TextView)item.findViewById(R.id.LblSubTitulo);
+                holder.argumento = (TextView)item.findViewById(R.id.LblArgumento);
+                holder.imagen = (ImageView)item.findViewById(R.id.ivImagen);
 
-            TextView lblArgumento = (TextView)item.findViewById(R.id.LblArgumento);
-            lblArgumento.setText(datos[position].getArgumento());
+                item.setTag(holder);
+            }
+            else
+                holder = (ViewHolder) item.getTag();
 
-            ImageView imagen = (ImageView) item.findViewById(R.id.ivImagen);
-            imagen.setBackground(getDrawable(datos[position].getImagen()));
+                holder.titulo.setText(datos[position].getTitulo());
 
-            return item;
+                holder.subtitulo.setText(datos[position].getSubtitulo());
+
+                holder.argumento.setText(datos[position].getArgumento());
+
+                holder.imagen.setBackground(getDrawable(datos[position].getImagen()));
+
+                return item;
         }
     }
 }
