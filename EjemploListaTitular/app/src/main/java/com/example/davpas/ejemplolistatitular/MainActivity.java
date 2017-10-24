@@ -1,6 +1,8 @@
 package com.example.davpas.ejemplolistatitular;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final Button miBoton= (Button)findViewById(R.id.btnGaleria);
+
+        miBoton.setOnClickListener( new View.OnClickListener(){
+            public void onClick(View v){
+
+                Intent miIntent= new Intent(MainActivity.this, Pantalla2.class);
+
+                startActivity(miIntent);
+            }
+        });
 
         AdaptadorTitulares adaptador = new AdaptadorTitulares(this);
         ListView lstOpciones = (ListView)findViewById(R.id.LstOpciones);
